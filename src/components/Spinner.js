@@ -12,6 +12,7 @@ Our first impulse might be to say 2 different states:
   - Whether the text of the button reads "Show Spinner" or "Hide Spinner".
 
 But a single slice of state is all that's needed here: whether spinner is on or not.
+
 The text of the button can be derived from the value of that one slice of state.
 
 STEP 0:
@@ -37,23 +38,24 @@ STEP 4:
   Do you remember the operator we use to do "not"?
 */
 
-import React from 'react'; /* STEP 0 */
+import React, { useState } from 'react'; 
 
 export default function Spinner() {
-/* STEP 1 */
+
+  const [spinnerOn, setSpinnerOn] = useState(true)
 
   const toggleSpinner = () => {
-  /* STEP 4 */
+  setSpinnerOn(!spinnerOn)
   };
 
   return (
     <div className='widget-spinner container'>
       <h2>Spinner</h2>
       {
-        true && <div id='spinner' className='spinner'>--+--</div> /* STEP 2 */
+        {spinnerOn} && <div id='spinner' className='spinner'>--+--</div>
       }
       <button id='toggleSpinner' onClick={toggleSpinner}>
-        Hide Spinner {/* STEP 3 */}
+        {spinnerOn === true ? "Hide Spinner" : "Show Spinner"}
       </button>
     </div>
   );
